@@ -42,7 +42,7 @@ const people = [
 </script>
 
 <template>
-  <div class="flex flex-row justify-center w-screen h-screen place-items-center bg-gray-500">
+  <div class="absolute top-[18vh] overflow-y-scroll w-screen h-[79vh] flex flex-row place-items-center justify-center pb-4 pt-20 my-4">
     <ul
       class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
     >
