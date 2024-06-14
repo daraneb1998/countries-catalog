@@ -1,19 +1,42 @@
 <script setup lang="ts">
+import type { CountryInfoType } from "@/types";
+
 const props = defineProps<{
-  person: {
-    name: string;
-    email: string;
-    image: string;
-  };
+  country: CountryInfoType;
 }>();
+console.log("country", props.country);
 </script>
 
 <template>
-  <button class=" bg-red-500 hover:scale-105 transition-all rounded-s">
-    <img class="size-100" :src="props.person.image" alt="" />
-    <div>
-      <p class="font-bold truncate">{{ props.person.name }}</p>
-      <p class="text-sm text-gray-500">{{ props.person.email }}</p>
+  <button
+    class="max-w-sm rounded overflow-hidden shadow-lg hover:scale-95 transition-all"
+  >
+    <img
+      class="w-full h-[200px]"
+      :src="country.flags.png"
+      alt="Sunset in the mountains"
+    />
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2">{{ props.country.name.official }}</div>
+      <!-- <p class="text-gray-700 text-base">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
+        quia, nulla! Maiores et perferendis eaque, exercitationem praesentium
+        nihil.
+      </p> -->
+    </div>
+    <div class="px-6 pt-4 pb-2">
+      <span
+        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+        >#{{ country.cca2 }}</span
+      >
+      <span
+        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+        >#{{ country.cca3 }}</span
+      >
+      <span
+        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+        >#{{ country.altSpellings.join(',') }}</span
+      >
     </div>
   </button>
 </template>
