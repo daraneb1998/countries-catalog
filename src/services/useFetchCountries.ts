@@ -1,8 +1,7 @@
-import type { CountryInfoType } from "@/types";
 import { ref } from "vue";
+import type { CountryInfoType } from "@/types";
 
 export const useFetchCountries = () => {
-  const countries = ref<Array<CountryInfoType>>([]);
   const error = ref<string>("");
   const isFetching = ref(false);
 
@@ -14,19 +13,18 @@ export const useFetchCountries = () => {
         throw new Error("Failed to fetch country data!");
       }
       const responseData = (await response.json()) as Array<CountryInfoType>;
-      countries.value = responseData;
+      return responseData;
     } catch (err) {
       error.value = (err as Error).message;
+      return [];
     } finally {
       isFetching.value = false;
     }
   };
 
-  fetchCountryData();
-
   return {
     error,
-    countries,
     isFetching,
+    fetchCountryData,
   };
 };
