@@ -3,12 +3,13 @@ import { useSearchStore } from "@/stores/search";
 import { SortType } from "@/types";
 
 const searchStore = useSearchStore();
-const onAscendingSort = () => {
-  searchStore.updateSortType(SortType.ASCENDING);
+const onGoToNextPage = () => {
+  searchStore.onGoToNextPage();
 };
-const onDescendingSort = () => {
-  searchStore.updateSortType(SortType.DESCENDING);
+const onGoToPreviousPage = () => {
+  searchStore.onGoToPreviousPage();
 };
+console.log("currentPageNumber:", searchStore.currentPageNumber);
 </script>
 
 <template>
@@ -28,18 +29,19 @@ const onDescendingSort = () => {
           ? 'bg-blue-500 text-white'
           : 'bg-transparent'
       "
-      @click="onAscendingSort"
+      @click="onGoToPreviousPage"
     >
       PREVIOUS
     </button>
     <button
-      class="border border-blue-500 hover:text-white px-4 hover:bg-blue-500 transition-colors"
+      :disabled="searchStore.totalPages === searchStore.currentPageNumber"
+      class="border border-blue-500 hover:text-white px-4 hover:bg-blue-500 transition-colors disabled:bg-slate-200 disabled:text-gray-500"
       :class="
         searchStore.sortType === SortType.DESCENDING
           ? 'bg-blue-500 text-white'
           : 'bg-transparent'
       "
-      @click="onDescendingSort"
+      @click="onGoToNextPage"
     >
       NEXT
     </button>
