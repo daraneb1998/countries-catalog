@@ -47,3 +47,7 @@ export interface CountryInfoType {
 export interface UseSearchType {
   keyword?: string;
 }
+export enum SortType {
+  ASCENDING = "ASCENDING",
+  DESCENDING = "DESCENDING",
+}
