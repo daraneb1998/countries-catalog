@@ -9,7 +9,6 @@ const onGoToNextPage = () => {
 const onGoToPreviousPage = () => {
   searchStore.onGoToPreviousPage();
 };
-console.log("currentPageNumber:", searchStore.currentPageNumber);
 </script>
 
 <template>

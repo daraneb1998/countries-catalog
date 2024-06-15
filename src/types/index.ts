@@ -51,3 +51,8 @@ export enum SortType {
   ASCENDING = "ASCENDING",
   DESCENDING = "DESCENDING",
 }
+
+export type CountryNativeName = Record<
+  string,
+  { common: string; official: string }
+>;
