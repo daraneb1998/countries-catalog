@@ -1,20 +1,45 @@
+<script setup lang="ts">
+import { useSearchStore } from "@/stores/search";
+import { SortType } from "@/types";
+
+const searchStore = useSearchStore();
+const onAscendingSort = () => {
+  searchStore.updateSortType(SortType.ASCENDING);
+};
+const onDescendingSort = () => {
+  searchStore.updateSortType(SortType.DESCENDING);
+};
+</script>
+
 <template>
   <div class="flex gap-x-2 flex-wrap sticky">
     <button
       disabled
       class="border border-blue-500 text-gray-500 px-4 bg-slate-200 transition-colors"
     >
-      SORT BY NAME:
+      SORT NAME
     </button>
     <button
       class="border border-blue-500 hover:text-white px-4 hover:bg-blue-500 transition-colors"
+      :class="
+        searchStore.sortType === SortType.ASCENDING
+          ? 'bg-blue-500'
+          : 'bg-transparent'
+      "
+      @click="onAscendingSort"
     >
-      ASCENDING
+      {{ SortType.ASCENDING }}
     </button>
     <button
       class="border border-blue-500 hover:text-white px-4 hover:bg-blue-500 transition-colors"
+      :class="
+        searchStore.sortType === SortType.DESCENDING
+          ? 'bg-blue-500'
+          : 'bg-transparent'
+      "
+      @click="onDescendingSort"
     >
-      DESCENDING
+      {{ SortType.DESCENDING }}
     </button>
   </div>
 </template>

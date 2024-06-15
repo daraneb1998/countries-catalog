@@ -2,7 +2,7 @@ import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 
 import { useFetchCountries } from "@/services/useFetchCountries";
-import type { CountryInfoType } from "@/types";
+import { SortType, type CountryInfoType } from "@/types";
 import { CONSTANTS, STORE_NAME } from "@/constants";
 import { defaultState } from "./defaultState";
 
@@ -17,6 +17,7 @@ export const useSearchStore = defineStore(
       defaultState.search.currentPageNumber
     );
     const searchKeyword = ref<string>(defaultState.search.searchKeyword);
+    const sortType = ref<SortType>(defaultState.search.sortType);
 
     const { error, isFetching, fetchCountryData } = useFetchCountries();
 
@@ -38,15 +39,27 @@ export const useSearchStore = defineStore(
             .toLowerCase()
             .includes((searchKeyword.value || "").toLowerCase());
         })
-        .sort((a: CountryInfoType, b: CountryInfoType) =>
-          a.name.official.localeCompare(b.name.official)
-        )
+        .sort((a: CountryInfoType, b: CountryInfoType) => {
+          switch (sortType.value) {
+            case SortType.ASCENDING:
+              return a.name.official.localeCompare(b.name.official);
+            case SortType.DESCENDING:
+              return b.name.official.localeCompare(a.name.official);
+            default:
+              return a.name.official.localeCompare(b.name.official);
+          }
+        })
         .slice(startIndex, startIndex + pageSize.value);
     }
 
-    const countries = computed(() => getCurrentCountries());
+    function updateSortType(type: SortType) {
+      sortType.value = type;
+    }
 
+    const countries = computed(() => getCurrentCountries());
+    console.log("sortType", sortType);
     return {
+      sortType,
       pageSize,
       error,
       allCountries,
@@ -54,6 +67,7 @@ export const useSearchStore = defineStore(
       currentPageNumber,
       countries,
       searchKeyword,
+      updateSortType,
       setSearchKeyword,
     };
   },
