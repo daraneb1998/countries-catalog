@@ -38,6 +38,9 @@ export const useSearchStore = defineStore(
             .toLowerCase()
             .includes((searchKeyword.value || "").toLowerCase());
         })
+        .sort((a: CountryInfoType, b: CountryInfoType) =>
+          a.name.official.localeCompare(b.name.official)
+        )
         .slice(startIndex, startIndex + pageSize.value);
     }
 
