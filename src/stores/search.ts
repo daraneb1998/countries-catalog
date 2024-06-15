@@ -31,11 +31,11 @@ export const useSearchStore = defineStore(
       searchKeyword.value = keyword;
     }
 
-    function getCurrentCountries() {
+    function getCurrentCountries(sort: string) {
       const startIndex = (currentPageNumber.value - 1) * pageSize.value;
       return allCountries.value
         .sort((a: CountryInfoType, b: CountryInfoType) => {
-          switch (sortType.value) {
+          switch (sort) {
             case SortType.ASCENDING:
               return a.name.official.localeCompare(b.name.official);
             case SortType.DESCENDING:
@@ -68,7 +68,7 @@ export const useSearchStore = defineStore(
       }
     }
 
-    const countries = computed(() => getCurrentCountries());
+    const countries = computed(() => getCurrentCountries(sortType.value));
     const totalPages = computed(() =>
       Math.ceil(allCountries.value.length / pageSize.value)
     );
