@@ -2,7 +2,7 @@
 import CountryItem from "./CountryItem.vue";
 import { useSearchStore } from "@/stores/search";
 
-const { countries } = useSearchStore();
+const { paginatedCountries } = useSearchStore();
 </script>
 
 <template>
@@ -12,7 +12,7 @@ const { countries } = useSearchStore();
     <ul
       class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 mx-8"
     >
-      <li v-for="country in countries" :key="country.flags.png">
+      <li v-for="country in paginatedCountries" :key="country.flags.png">
         <CountryItem :country="country" :key="country.flags.png" />
       </li>
     </ul>
