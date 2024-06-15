@@ -13,9 +13,8 @@ import IconSearch from "@/components/icons/IconSearch.vue";
     <input
       id="default-search"
       type="search"
-      class="block p-4 pl-10 w-full rounded-sm border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-      placeholder="Country Name"
-      data-v-65e472f8=""
+      class="block p-4 pl-10 w-full rounded-sm border focus:border-none"
+      placeholder="Country name"
     />
     <div class="text-red-400 mt-2.5 absolute" data-v-65e472f8=""></div>
   </div>
