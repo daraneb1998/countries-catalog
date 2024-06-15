@@ -11,18 +11,17 @@ const handleChange = (event: Event) => {
 </script>
 
 <template>
-  <div class="w-1/2 absolute flex flex-row translate-x-1/2 top-[10%]">
+  <div class="sticky flex flex-row w-1/3">
     <div
       class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
-      data-v-65e472f8=""
     >
       <IconSearch />
     </div>
     <input
       id="default-search"
       type="text"
-      class="block p-4 pl-10 w-full rounded-sm border focus:border-none"
-      placeholder="Country name"
+      class="block p-4 pl-10 w-full rounded-sm border border-blue-500 focus:outline-none focus:border-blue-700 bg-sky-50"
+      placeholder="COUNTRY NAME"
       :value="searchStore.searchKeyword"
       @input="handleChange"
     />
