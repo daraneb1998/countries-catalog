@@ -1,5 +1,5 @@
-export interface UseFetchPropsType {
-  url: string;
+export interface CurrencyType {
+  [key: string]: { name: string; symbol: string };
 }
 
 export interface CountryInfoType {
