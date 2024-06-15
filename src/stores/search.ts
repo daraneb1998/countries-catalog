@@ -1,6 +1,7 @@
+import { ref } from "vue";
 import { defineStore } from "pinia";
+
 import { useFetchCountries } from "@/services/useFetchCountries";
-import { onMounted, ref } from "vue";
 import type { CountryInfoType } from "@/types";
 import { CONSTANTS } from "@/constants";
 
@@ -15,7 +16,11 @@ export const useSearchStore = defineStore(
       });
     }
 
-    return { error, countries, isFetching };
+    return {
+      error,
+      countries,
+      isFetching,
+    };
   },
   {
     persist: true,
