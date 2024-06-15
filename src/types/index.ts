@@ -44,3 +44,6 @@ export interface CountryInfoType {
   postalCode: { format: string; regex: string };
 }
 
+export interface UseSearchType {
+  keyword?: string;
+}

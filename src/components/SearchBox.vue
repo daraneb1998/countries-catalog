@@ -1,5 +1,13 @@
 <script setup lang="ts">
 import IconSearch from "@/components/icons/IconSearch.vue";
+import { useSearchStore } from "@/stores/search";
+
+const searchStore = useSearchStore();
+
+const handleChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  searchStore.setSearchKeyword(target.value);
+};
 </script>
 
 <template>
@@ -12,10 +20,11 @@ import IconSearch from "@/components/icons/IconSearch.vue";
     </div>
     <input
       id="default-search"
-      type="search"
+      type="text"
       class="block p-4 pl-10 w-full rounded-sm border focus:border-none"
       placeholder="Country name"
+      :value="searchStore.searchKeyword"
+      @input="handleChange"
     />
-    <div class="text-red-400 mt-2.5 absolute" data-v-65e472f8=""></div>
   </div>
 </template>

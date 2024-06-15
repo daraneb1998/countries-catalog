@@ -5,6 +5,7 @@ export const defaultState = {
     error: null,
     allCountries: [],
     isFetching: false,
+    searchKeyword: '',
     pageSize: CONSTANTS.DEFAULT_PAGE_SIZE,
     currentPageNumber: CONSTANTS.CURRENT_PAGE_NUMBER
   },
