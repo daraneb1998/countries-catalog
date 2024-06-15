@@ -17,7 +17,7 @@ const countryInfo = `${countryData.name.common}, officially known as the ${count
     class="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-clip-border text-gray-700 shadow-lg hover:scale-105 transition-all bg-slate-200 h-full"
   >
     <div
-      class="relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40"
+      class="relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40 w-full-16px bg-red-500"
     >
       <img
         class="w-full h-52"
