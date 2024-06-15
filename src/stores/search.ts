@@ -1,16 +1,21 @@
-import { ref, computed } from "vue";
 import { defineStore } from "pinia";
+import { useFetchCountries } from "@/services/useFetchCountries";
+import { onMounted, ref } from "vue";
+import type { CountryInfoType } from "@/types";
+import { CONSTANTS } from "@/constants";
 
 export const useSearchStore = defineStore(
   "search",
   () => {
-    const count = ref(0);
-    const doubleCount = computed(() => count.value * 2);
-    function increment() {
-      count.value++;
+    const { error, isFetching, fetchCountryData } = useFetchCountries();
+    const countries = ref<Array<CountryInfoType>>([]);
+    if (countries.value.length <= CONSTANTS.EMPTY_ARRAY_SIZE) {
+      fetchCountryData().then((countryItems) => {
+        countries.value = countryItems;
+      });
     }
 
-    return { count, doubleCount, increment };
+    return { error, countries, isFetching };
   },
   {
     persist: true,

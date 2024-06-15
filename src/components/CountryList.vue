@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useFetchCountries } from "@/services/useFetchCountries";
 import CountryItem from "./CountryItem.vue";
+import { useSearchStore } from "@/stores/search";
 
-const { error, countries, isFetching } = useFetchCountries();
+const { countries } = useSearchStore();
 </script>
 
 <template>
