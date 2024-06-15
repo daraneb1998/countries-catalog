@@ -34,11 +34,6 @@ export const useSearchStore = defineStore(
     function getCurrentCountries() {
       const startIndex = (currentPageNumber.value - 1) * pageSize.value;
       return allCountries.value
-        .filter((country: CountryInfoType) => {
-          return country.name.official
-            .toLowerCase()
-            .includes((searchKeyword.value || "").toLowerCase());
-        })
         .sort((a: CountryInfoType, b: CountryInfoType) => {
           switch (sortType.value) {
             case SortType.ASCENDING:
@@ -49,6 +44,11 @@ export const useSearchStore = defineStore(
               return a.name.official.localeCompare(b.name.official);
           }
         })
+        .filter((country: CountryInfoType) => {
+          return country.name.official
+            .toLowerCase()
+            .includes(searchKeyword.value.toLowerCase());
+        })
         .slice(startIndex, startIndex + pageSize.value);
     }
 
@@ -56,10 +56,23 @@ export const useSearchStore = defineStore(
       sortType.value = type;
     }
 
+    function onGoToNextPage() {
+      if (currentPageNumber.value <= totalPages.value) {
+        currentPageNumber.value++;
+      }
+    }
+
+    function onGoToPreviousPage() {
+      if (currentPageNumber.value !== CONSTANTS.INITIAL_PAGE_NUMBER) {
+        currentPageNumber.value--;
+      }
+    }
+
     const countries = computed(() => getCurrentCountries());
     const totalPages = computed(() =>
-      (allCountries.value.length / pageSize.value).toFixed()
+      Math.ceil(allCountries.value.length / pageSize.value)
     );
+
     return {
       error,
       sortType,
@@ -72,6 +85,8 @@ export const useSearchStore = defineStore(
       searchKeyword,
       updateSortType,
       setSearchKeyword,
+      onGoToNextPage,
+      onGoToPreviousPage,
     };
   },
   {
