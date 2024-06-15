@@ -57,11 +57,14 @@ export const useSearchStore = defineStore(
     }
 
     const countries = computed(() => getCurrentCountries());
-    console.log("sortType", sortType);
+    const totalPages = computed(() =>
+      (allCountries.value.length / pageSize.value).toFixed()
+    );
     return {
+      error,
       sortType,
       pageSize,
-      error,
+      totalPages,
       allCountries,
       isFetching,
       currentPageNumber,

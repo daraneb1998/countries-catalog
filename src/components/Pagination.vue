@@ -17,10 +17,12 @@ const onDescendingSort = () => {
       disabled
       class="border border-blue-500 text-gray-500 px-4 bg-slate-200 transition-colors"
     >
-      SORT NAME
+      Page {{ searchStore.currentPageNumber }} ({{ searchStore.pageSize }}) of
+      {{ searchStore.totalPages }}
     </button>
     <button
-      class="border border-blue-500 hover:text-white px-4 hover:bg-blue-500 transition-colors"
+      :disabled="searchStore.currentPageNumber === 1"
+      class="border border-blue-500 hover:text-white px-4 hover:bg-blue-500 transition-colors disabled:bg-slate-200 disabled:text-gray-500"
       :class="
         searchStore.sortType === SortType.ASCENDING
           ? 'bg-blue-500 text-white'
@@ -28,7 +30,7 @@ const onDescendingSort = () => {
       "
       @click="onAscendingSort"
     >
-      {{ SortType.ASCENDING }}
+      PREVIOUS
     </button>
     <button
       class="border border-blue-500 hover:text-white px-4 hover:bg-blue-500 transition-colors"
@@ -39,7 +41,7 @@ const onDescendingSort = () => {
       "
       @click="onDescendingSort"
     >
-      {{ SortType.DESCENDING }}
+      NEXT
     </button>
   </div>
 </template>

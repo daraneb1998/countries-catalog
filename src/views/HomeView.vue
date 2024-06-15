@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Title from "@/components/Title.vue";
 import SortOption from "@/components/SortOption.vue";
+import Pagination from "@/components/Pagination.vue";
 import SearchBox from "@/components/SearchBox.vue";
 import CountryList from "@/components/CountryList.vue";
 </script>
@@ -11,7 +12,7 @@ import CountryList from "@/components/CountryList.vue";
     <div class="sticky top-[10%] flex justify-around">
       <SortOption />
       <SearchBox />
-      <SortOption />
+      <Pagination />
     </div>
     <CountryList />
   </main>
