@@ -3,6 +3,7 @@ import { useDebounceFn } from "@vueuse/core";
 
 import IconSearch from "@/components/icons/IconSearch.vue";
 import { useSearchStore } from "@/stores/search";
+import { CONSTANTS } from "@/constants";
 
 const searchStore = useSearchStore();
 
@@ -12,7 +13,7 @@ const handleChange = (event: Event) => {
 };
 const handleDebouncedSearch = useDebounceFn((event: Event) => {
   handleChange(event);
-}, 300);
+}, CONSTANTS.DEBOUNCED_SEARCH_DURATION);
 </script>
 
 <template>
