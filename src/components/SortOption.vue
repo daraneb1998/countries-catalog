@@ -2,22 +2,14 @@
 import { useSearchStore } from "@/stores/search";
 import { SortType } from "@/types";
 
-import { useLoading } from "vue-loading-overlay";
-
-const $loading = useLoading({
-  isFullPage: true,
-});
-
 const searchStore = useSearchStore();
 const onAscendingSort = () => {
-  const loader = $loading.show();
+  searchStore.onLoading();
   searchStore.updateSortType(SortType.ASCENDING);
-  loader.hide();
 };
 const onDescendingSort = () => {
-  const loader = $loading.show();
+  searchStore.onLoading();
   searchStore.updateSortType(SortType.DESCENDING);
-  loader.hide();
 };
 </script>
 

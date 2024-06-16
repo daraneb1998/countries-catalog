@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSearchStore } from "@/stores/search";
-import Loading from "vue-loading-overlay";
+import VueLoading from 'vue-loading-overlay';
 import "vue-loading-overlay/dist/css/index.css";
 
 const searchStore = useSearchStore();
@@ -8,6 +8,10 @@ const searchStore = useSearchStore();
 
 <template>
   <div class="vl-parent">
-    <Loading v-model="searchStore.isLoading" is-full-page="true" />
+    <VueLoading
+      :visible="searchStore.isLoading"
+      :color="'#4fc08d'"
+      :size="'large'"
+    ></VueLoading>
   </div>
 </template>
