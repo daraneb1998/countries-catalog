@@ -1,10 +1,11 @@
-import { computed, reactive, ref } from "vue";
+import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 
 import { useFetchCountries } from "@/services/useFetchCountries";
 import { SortType, type CountryInfoType } from "@/types";
 import { CONSTANTS, STORE_NAME } from "@/constants";
 import { defaultState } from "./defaultState";
+import { useMemoize } from "@vueuse/core";
 
 export const useSearchStore = defineStore(
   STORE_NAME.SEARCH,
@@ -14,7 +15,6 @@ export const useSearchStore = defineStore(
     );
     const pageSize = ref<number>(defaultState.search.pageSize);
     const isLoading = ref<boolean>(defaultState.search.isLoading);
-    const countryCaches = reactive(new Map<string, Array<CountryInfoType>>());
 
     const currentPageNumber = ref<number>(
       defaultState.search.currentPageNumber
@@ -34,15 +34,12 @@ export const useSearchStore = defineStore(
       searchKeyword.value = keyword;
     }
 
-    function getCachedCurrentCountries() {
-      const startIndex = (currentPageNumber.value - 1) * pageSize.value;
-      return (keyword: string) => {
-        if (countryCaches.has(keyword)) {
-          return countryCaches.get(keyword);
-        }
-        const countryData = allCountries.value
+    const getCachedCurrentCountries = useMemoize(
+      (sort: SortType, keyword: string) => {
+        const startIndex = (currentPageNumber.value - 1) * pageSize.value;
+        return allCountries.value
           .sort((a: CountryInfoType, b: CountryInfoType) => {
-            switch (sortType.value) {
+            switch (sort) {
               case SortType.ASCENDING:
                 return a.name.official.localeCompare(b.name.official);
               case SortType.DESCENDING:
@@ -57,10 +54,8 @@ export const useSearchStore = defineStore(
               .includes(keyword.toLowerCase());
           })
           .slice(startIndex, startIndex + pageSize.value);
-        countryCaches.set(keyword, countryData);
-        return countryData;
-      };
-    }
+      }
+    );
 
     function updateSortType(type: SortType) {
       sortType.value = type;
@@ -84,7 +79,7 @@ export const useSearchStore = defineStore(
     }
 
     const countries = computed(() =>
-      getCachedCurrentCountries()(searchKeyword.value)
+      getCachedCurrentCountries(sortType.value, searchKeyword.value)
     );
     const totalPages = computed(() =>
       Math.ceil(allCountries.value.length / pageSize.value)
