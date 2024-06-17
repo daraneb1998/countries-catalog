@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Modal > renders properly 1`] = `""`;
+
+exports[`Pagination > renders properly 1`] = `"Page 1 (25) of 0 PREVIOUS  NEXT"`;

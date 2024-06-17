@@ -2,22 +2,15 @@ import { describe, it, expect, beforeEach } from "vitest";
 
 import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
-import Modal from "../Modal.vue";
-import { mockedCountry } from "@/assets/data";
+import Pagination from "../Pagination.vue";
 
-describe("Modal", () => {
+describe("Pagination", () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });
 
   it("renders properly", () => {
-    const wrapper = mount(Modal, {
-      props: {
-        isOpened: false,
-        closeModal: () => {},
-        country: mockedCountry,
-      },
-    });
+    const wrapper = mount(Pagination);
     expect(wrapper.text()).toMatchSnapshot();
   });
 });
