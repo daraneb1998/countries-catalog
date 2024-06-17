@@ -32,7 +32,7 @@ export interface CountryInfoType {
   flag: string;
   maps: { googleMaps: string; openStreetMaps: string };
   population: number;
-  gini: { [year: string]: number };
+  gini?: { [year: string]: number };
   fifa: string;
   car: { signs: string[]; side: string };
   timezones: string[];
