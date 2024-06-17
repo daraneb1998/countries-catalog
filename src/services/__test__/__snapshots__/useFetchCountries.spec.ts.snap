@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CountryList > renders properly 1`] = `""`;
+
+exports[`useFetchCountries > Initialize state 1`] = `
+RefImpl {
+  "__v_isRef": true,
+  "__v_isShallow": false,
+  "_rawValue": "",
+  "_value": "",
+  "dep": undefined,
+}
+`;
