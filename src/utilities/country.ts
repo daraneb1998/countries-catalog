@@ -8,7 +8,7 @@ export const getCountryCurrencies = (
   )?.[0];
 };
 
-export const getNativeCountryNames = (nativeName: CountryNativeName) => {
+export const getNativeCountryNames = (nativeName: CountryNativeName| undefined) => {
   if (!nativeName) {
     return "N/A";
   }
