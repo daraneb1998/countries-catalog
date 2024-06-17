@@ -18,7 +18,7 @@ const handleDebouncedSearch = useDebounceFn((event: Event) => {
 </script>
 
 <template>
-  <div class="sticky flex flex-row md:w-1/3 m-auto h-12 md:my-5">
+  <div class="sticky flex flex-row md:w-1/3 m-auto h-12 md:my-5 w-[calc(100vw-61px)]">
     <div
       class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
     >
