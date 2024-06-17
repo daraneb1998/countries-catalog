@@ -35,7 +35,7 @@ function openModal() {
       class="relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40 w-full-16px bg-red-500"
     >
       <img
-        class="w-full h-52"
+        class="w-screen h-52"
         :src="props.country.flags.png"
         :alt="props.country.name.official"
       />
