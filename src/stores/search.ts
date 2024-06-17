@@ -4,7 +4,6 @@ import { defineStore } from "pinia";
 import { SortType, type CountryInfoType } from "@/types";
 import { CONSTANTS, STORE_NAME } from "@/constants";
 import { defaultState } from "./defaultState";
-import type { RefSymbol } from "@vue/reactivity";
 import { useFetchCountries } from "@/services/useFetchCountries";
 
 export const useSearchStore = defineStore(
@@ -35,6 +34,7 @@ export const useSearchStore = defineStore(
           onSpinnerInvisible();
         });
       }
+
       return (keyword: string) => {
         if (countryCaches.has(keyword.trim())) {
           return countryCaches.get(keyword.trim());
