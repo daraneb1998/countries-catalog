@@ -12,7 +12,6 @@ const props = defineProps<{
 const isOpened = ref(false);
 const currencies = getCountryCurrencies(props.country.currencies);
 const countryData = props.country;
-console.log('countryData', countryData.name.nativeName)
 const countryInfo = `${countryData.name.common}, officially known as the ${countryData.name.official}, is located in ${countryData.region}. It covers approximately ${countryData.area} square kilometers with ${props.country.population} populations and uses the ${currencies?.name} (${currencies?.symbol}) as its currency. The capital city is ${countryData.capital?.[0]}. The official languages spoken are ${Object.values(
   countryData.languages || {}
 ).join(" and ")}.`;
