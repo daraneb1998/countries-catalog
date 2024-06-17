@@ -10,6 +10,6 @@ export const defaultState = {
     pageSize: CONSTANTS.DEFAULT_PAGE_SIZE,
     currentPageNumber: CONSTANTS.CURRENT_PAGE_NUMBER,
     sortType: SortType.ASCENDING,
-    isLoading: false,
+    isSpinnerLoading: false,
   },
 };
