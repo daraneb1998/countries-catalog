@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CountryItem > renders properly 1`] = `"Phnom PenhKingdom of CambodiaCambodia, officially known as the Kingdom of Cambodia, is located in Asia. It covers approximately 181035 square kilometers with 16718971 populations and uses the Cambodian riel (៛) as its currency. The capital city is Phnom Penh. The official languages spoken are Khmer."`;
