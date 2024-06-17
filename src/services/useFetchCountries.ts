@@ -8,7 +8,7 @@ export const useFetchCountries = () => {
   const fetchCountryData = async () => {
     isFetching.value = true;
     try {
-      const response = await fetch(import.meta.env.VITE_COUNTRY_ENPOINT_ALL);
+      const response = await fetch("https://restcountries.com/v3.1/all");
       if (!response.ok) {
         throw new Error("Failed to fetch country data!");
       }
