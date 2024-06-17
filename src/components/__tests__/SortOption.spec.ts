@@ -2,22 +2,15 @@ import { describe, it, expect, beforeEach } from "vitest";
 
 import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
-import Modal from "../Modal.vue";
-import { mockedCountry } from "@/assets/data";
+import SortOption from "../SortOption.vue";
 
-describe("Modal", () => {
+describe("SortOption", () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });
 
   it("renders properly", () => {
-    const wrapper = mount(Modal, {
-      props: {
-        isOpened: false,
-        closeModal: () => {},
-        country: mockedCountry,
-      },
-    });
+    const wrapper = mount(SortOption);
     expect(wrapper.text()).toMatchSnapshot();
   });
 });

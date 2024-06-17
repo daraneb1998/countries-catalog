@@ -2,19 +2,17 @@ import { describe, it, expect, beforeEach } from "vitest";
 
 import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
-import Modal from "../Modal.vue";
+import CountryItem from "../CountryItem.vue";
 import { mockedCountry } from "@/assets/data";
 
-describe("Modal", () => {
+describe("CountryItem", () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });
 
   it("renders properly", () => {
-    const wrapper = mount(Modal, {
+    const wrapper = mount(CountryItem, {
       props: {
-        isOpened: false,
-        closeModal: () => {},
         country: mockedCountry,
       },
     });
