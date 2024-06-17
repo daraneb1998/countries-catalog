@@ -4,13 +4,20 @@ import { SortType } from "@/types";
 
 const searchStore = useSearchStore();
 const onAscendingSort = () => {
-  searchStore.onLoading();
+  searchStore.onSpinnerVisible();
   searchStore.updateSortType(SortType.ASCENDING);
+  setTimeout(() => {
+    searchStore.onSpinnerInvisible();
+  }, 1000);
 };
 const onDescendingSort = () => {
-  searchStore.onLoading();
+  searchStore.onSpinnerVisible();
   searchStore.updateSortType(SortType.DESCENDING);
+  setTimeout(() => {
+    searchStore.onSpinnerInvisible();
+  }, 1000);
 };
+console.log("searchStore isLoading", searchStore.isSpinnerLoading);
 </script>
 
 <template>

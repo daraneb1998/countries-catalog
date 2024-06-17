@@ -1,11 +1,11 @@
 import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 
-import { useFetchCountries } from "@/services/useFetchCountries";
 import { SortType, type CountryInfoType } from "@/types";
 import { CONSTANTS, STORE_NAME } from "@/constants";
 import { defaultState } from "./defaultState";
-import { useMemoize } from "@vueuse/core";
+import type { RefSymbol } from "@vue/reactivity";
+import { useFetchCountries } from "@/services/useFetchCountries";
 
 export const useSearchStore = defineStore(
   STORE_NAME.SEARCH,
@@ -14,32 +14,41 @@ export const useSearchStore = defineStore(
       defaultState.search.allCountries
     );
     const pageSize = ref<number>(defaultState.search.pageSize);
-    const isLoading = ref<boolean>(defaultState.search.isLoading);
-
+    const isSpinnerLoading = ref<boolean>(defaultState.search.isSpinnerLoading);
     const currentPageNumber = ref<number>(
       defaultState.search.currentPageNumber
     );
     const searchKeyword = ref<string>(defaultState.search.searchKeyword);
     const sortType = ref<SortType>(defaultState.search.sortType);
-
     const { error, isFetching, fetchCountryData } = useFetchCountries();
-
-    if (allCountries.value.length <= CONSTANTS.EMPTY_ARRAY_SIZE) {
-      fetchCountryData().then((countryItems) => {
-        allCountries.value = countryItems;
-      });
-    }
 
     function setSearchKeyword(keyword: string) {
       searchKeyword.value = keyword;
     }
 
-    const getCachedCurrentCountries = useMemoize(
-      (sort: SortType, keyword: string) => {
+    function getCachedCurrentCountries() {
+      const countryCaches = new Map<string, CountryInfoType[]>();
+      if (allCountries.value.length <= CONSTANTS.EMPTY_ARRAY_SIZE) {
+        onSpinnerVisible();
+        fetchCountryData().then((countryItems) => {
+          allCountries.value = countryItems;
+          onSpinnerInvisible();
+        });
+      }
+      return (keyword: string) => {
+        if (countryCaches.has(keyword.trim())) {
+          return countryCaches.get(keyword.trim());
+        }
         const startIndex = (currentPageNumber.value - 1) * pageSize.value;
-        return allCountries.value
+        const countries = allCountries.value
+          .filter((country: CountryInfoType) => {
+            return country.name.official
+              .toLowerCase()
+              .includes(keyword.toLowerCase());
+          })
+          .slice(startIndex, startIndex + pageSize.value)
           .sort((a: CountryInfoType, b: CountryInfoType) => {
-            switch (sort) {
+            switch (sortType.value) {
               case SortType.ASCENDING:
                 return a.name.official.localeCompare(b.name.official);
               case SortType.DESCENDING:
@@ -47,19 +56,14 @@ export const useSearchStore = defineStore(
               default:
                 return a.name.official.localeCompare(b.name.official);
             }
-          })
-          .filter((country: CountryInfoType) => {
-            return country.name.official
-              .toLowerCase()
-              .includes(keyword.toLowerCase());
-          })
-          .slice(startIndex, startIndex + pageSize.value);
-      }
-    );
+          });
+        countryCaches.set(keyword, countries);
+        return countries;
+      };
+    }
 
     function updateSortType(type: SortType) {
       sortType.value = type;
-      isLoading.value = false;
     }
 
     function onGoToNextPage() {
@@ -74,12 +78,16 @@ export const useSearchStore = defineStore(
       }
     }
 
-    function onLoading() {
-      isLoading.value = true;
+    function onSpinnerInvisible() {
+      isSpinnerLoading.value = false;
+    }
+
+    function onSpinnerVisible() {
+      isSpinnerLoading.value = true;
     }
 
     const countries = computed(() =>
-      getCachedCurrentCountries(sortType.value, searchKeyword.value)
+      getCachedCurrentCountries()(searchKeyword.value)
     );
     const totalPages = computed(() =>
       Math.ceil(allCountries.value.length / pageSize.value)
@@ -89,18 +97,19 @@ export const useSearchStore = defineStore(
       error,
       sortType,
       pageSize,
-      isLoading,
       totalPages,
       allCountries,
       isFetching,
       currentPageNumber,
       countries,
       searchKeyword,
-      onLoading,
+      isSpinnerLoading,
       updateSortType,
       setSearchKeyword,
       onGoToNextPage,
       onGoToPreviousPage,
+      onSpinnerVisible,
+      onSpinnerInvisible,
     };
   },
   {

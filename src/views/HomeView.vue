@@ -9,7 +9,7 @@ import CountryList from "@/components/CountryList.vue";
 
 <template>
   <main class="h-screen w-screen absolute bg-sky-50">
-    <!-- <Loader /> -->
+    <Loader />
     <Title />
     <div class="sticky top-[10%] flex justify-around">
       <SortOption />
