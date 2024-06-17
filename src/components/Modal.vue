@@ -13,7 +13,9 @@ const props = defineProps<{
   closeModal: () => void;
   country: CountryInfoType;
 }>();
-
+if (props.country.name.official === "Antarctica") {
+  console.log("props.country.name.nativeName", props.country.name.nativeName);
+}
 const nativeNames = getNativeCountryNames(props.country.name.nativeName);
 </script>
 
@@ -33,9 +35,7 @@ const nativeNames = getNativeCountryNames(props.country.name.nativeName);
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
-        <div
-          class="flex min-h-full items-center justify-center text-center"
-        >
+        <div class="flex min-h-full items-center justify-center text-center">
           <TransitionChild
             as="template"
             enter="duration-300 ease-out"
@@ -92,8 +92,10 @@ const nativeNames = getNativeCountryNames(props.country.name.nativeName);
                 </div>
                 <div>
                   <span class="font-medium">Country Calling Codes:</span>
-                  Suffixes {{ props.country.idd.suffixes.join(", ") }} and Root
-                  {{ props.country.idd.root }}
+                  Suffixes
+                  {{ (props.country.idd.suffixes || ["N/A"]).join(", ") }} and
+                  Root
+                  {{ props.country.idd.root || "N/A" }}
                 </div>
               </div>
 
