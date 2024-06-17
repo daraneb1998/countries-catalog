@@ -86,6 +86,10 @@ export const useSearchStore = defineStore(
       isSpinnerLoading.value = true;
     }
 
+    function updateCurrentPageNumber(curentPage: number) {
+      currentPageNumber.value = curentPage;
+    }
+
     const countries = computed(() =>
       getCachedCurrentCountries()(searchKeyword.value)
     );
@@ -110,6 +114,7 @@ export const useSearchStore = defineStore(
       onGoToPreviousPage,
       onSpinnerVisible,
       onSpinnerInvisible,
+      updateCurrentPageNumber,
     };
   },
   {
