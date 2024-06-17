@@ -7,7 +7,7 @@ const searchStore = useSearchStore();
 </script>
 
 <template>
-  <div class="vl-parent">
+  <div class="vl-parent" data-test="loader">
     <VueLoading
       :active="searchStore.isSpinnerLoading"
       color="#2196F3"

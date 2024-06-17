@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`IconSearch > renders properly 1`] = `""`;
+
+exports[`Loader > renders properly 1`] = `""`;
