@@ -12,6 +12,7 @@ const handleChange = (event: Event) => {
   searchStore.setSearchKeyword(target.value);
 };
 const handleDebouncedSearch = useDebounceFn((event: Event) => {
+  searchStore.updateCurrentPageNumber(CONSTANTS.INITIAL_PAGE_NUMBER);
   handleChange(event);
 }, CONSTANTS.DEBOUNCED_SEARCH_DURATION);
 </script>
