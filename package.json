@@ -10,7 +10,7 @@
     "test:unit": "vitest",
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d dist",
-    "build-only": "vite build --base=/",
+    "build-only": "vite build --base=/countries-catalog/",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
