@@ -17,17 +17,11 @@ const onDescendingSort = () => {
     searchStore.onSpinnerInvisible();
   }, 1000);
 };
-console.log("searchStore isLoading", searchStore.isSpinnerLoading);
 </script>
 
 <template>
-  <div class="flex gap-x-2 flex-wrap sticky">
-    <button
-      disabled
-      class="border border-blue-500 text-gray-500 px-4 bg-slate-200 transition-colors"
-    >
-      SORT NAME
-    </button>
+  <div class="flex gap-x-2">
+    <p class="text-base text-gray-500 hidden md:inline">SORT NAME</p>
     <button
       class="border border-blue-500 hover:text-white px-4 hover:bg-blue-500 transition-colors"
       :class="

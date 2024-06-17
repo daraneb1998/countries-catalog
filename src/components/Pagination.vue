@@ -12,14 +12,11 @@ const onGoToPreviousPage = () => {
 </script>
 
 <template>
-  <div class="flex gap-x-2 flex-wrap sticky">
-    <button
-      disabled
-      class="border border-blue-500 text-gray-500 px-4 bg-slate-200 transition-colors"
-    >
+  <div class="flex gap-x-2">
+    <p class="text-gray-500 self-center text-base hidden md:inline">
       Page {{ searchStore.currentPageNumber }} ({{ searchStore.pageSize }}) of
       {{ searchStore.totalPages }}
-    </button>
+    </p>
     <button
       :disabled="
         searchStore.currentPageNumber === 1 || searchStore.searchKeyword !== ''
