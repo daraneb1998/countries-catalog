@@ -21,8 +21,10 @@ const onGoToPreviousPage = () => {
       {{ searchStore.totalPages }}
     </button>
     <button
-      :disabled="searchStore.currentPageNumber === 1"
-      class="border border-blue-500 hover:text-white px-4 hover:bg-blue-500 transition-colors disabled:bg-slate-200 disabled:text-gray-500"
+      :disabled="
+        searchStore.currentPageNumber === 1 || searchStore.searchKeyword !== ''
+      "
+      class="border border-blue-500 hover:text-white px-4 hover:bg-blue-500 transition-colors disabled:bg-slate-200 disabled:text-gray-500 disabled:cursor-not-allowed"
       :class="
         searchStore.sortType === SortType.ASCENDING
           ? 'bg-blue-500 text-white'
@@ -33,8 +35,11 @@ const onGoToPreviousPage = () => {
       PREVIOUS
     </button>
     <button
-      :disabled="searchStore.totalPages === searchStore.currentPageNumber"
-      class="border border-blue-500 hover:text-white px-4 hover:bg-blue-500 transition-colors disabled:bg-slate-200 disabled:text-gray-500"
+      :disabled="
+        searchStore.totalPages === searchStore.currentPageNumber ||
+        searchStore.searchKeyword !== ''
+      "
+      class="border border-blue-500 hover:text-white px-4 hover:bg-blue-500 transition-colors disabled:bg-slate-200 disabled:text-gray-500 disabled:cursor-not-allowed"
       :class="
         searchStore.sortType === SortType.DESCENDING
           ? 'bg-blue-500 text-white'
