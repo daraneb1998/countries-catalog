@@ -8,7 +8,7 @@ import CountryList from "@/components/CountryList.vue";
 </script>
 
 <template>
-  <main class="h-screen w-screen absolute bg-sky-50">
+  <main class="h-screen w-screen absolute bg-sky-50 overflow-x-hidden">
     <Loader />
     <Title />
     <div

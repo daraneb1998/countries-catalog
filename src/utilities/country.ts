@@ -9,6 +9,9 @@ export const getCountryCurrencies = (
 };
 
 export const getNativeCountryNames = (nativeName: CountryNativeName) => {
+  if (!nativeName) {
+    return "N/A";
+  }
   return Object.keys(nativeName || {})
     .map((value: string) => nativeName[value].official)
     .join(", ");
